@@ -5,21 +5,21 @@
 extern keymap_config_t keymap_config;
 
 #define KC_ KC_TRNS
-#define KC_FN0 F(0)
-#define KC_FN1 F(1)
+#define KC_FN0 MO(1)
+#define KC_FN1 MO(2)
 #define KC_RGHT KC_RIGHT
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   LAYOUT_kc(
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-     ESC , 1  , 2  , 3  , 4  , 5  ,                6  , 7  , 8  , 9  , 0  ,BSPC,
+     ESC ,EXLM, AT ,HASH,DLR ,PERC,               CIRC,AMPR,ASTR,MINS,EQL ,BSPC,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     TAB , Q  , W  , E  , R  , T  ,                Y  , U  , I  , O  , P  ,BSLS,
+     TAB , Q  , W  , E  , R  , T  ,                Y  , U  , I  , O  , P  ,SLSH,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
      LCTL, A  , S  , D  , F  , G  ,                H  , J  , K  , L  ,SCLN,QUOT,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     LSFT,GRV , Z  , X  , C  , V  ,SPC ,     ENT , B  , N  , M  ,COMM,DOT ,SLSH,
+     LSFT,GRV , Z  , X  , C  , V  ,SPC ,     ENT , B  , N  , M  ,COMM,DOT ,RSFT,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
                        LALT,LGUI,SPC ,         ENT ,FN0 ,FN1
   //                  `----+----+----'        `----+----+----'
@@ -27,13 +27,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   LAYOUT_kc(
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-     F12 , F1 , F2 , F3 , F4 , F5 ,                F6 , F7 , F8 , F9 ,F10 ,F11 ,
+         , 1  , 2  , 3  , 4  , 5  ,                6  , 7  , 8  , 9  , 0  ,    ,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-         ,BTN1,MS_U,BTN2,    ,    ,               MUTE,VOLD,VOLU,    ,    ,    ,
+         ,    ,LPRN,RPRN,    ,    ,               MUTE,VOLD,VOLU,    ,    ,    ,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-         ,MS_L,MS_D,MS_R,    ,    ,               LEFT,DOWN, UP ,RGHT,    ,    ,
+         ,LBRC,LCBR,RCBR,RBRC,    ,               LEFT,DOWN, UP ,RGHT,    ,    ,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-         ,    ,    ,    ,    ,    ,    ,         ,MRWD,MPLY,MSTP,MFFD,    ,    ,
+         ,BSLS,LABK,RABK,    ,    ,    ,         ,MRWD,MPLY,MFFD,    ,    ,    ,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
                            ,    ,    ,             ,FN0 ,FN1
   //                  `----+----+----'        `----+----+----'
@@ -41,22 +41,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   LAYOUT_kc(
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-         ,    ,    ,    ,    ,    ,                   ,    ,    ,MINS,EQL ,DEL ,
+         ,    , 0  ,    ,    ,    ,                   ,    ,    ,    ,    ,    ,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-         ,    ,WH_U,    ,    ,    ,                   ,    ,    ,LBRC,RBRC,    ,
+         ,PLUS, 1  , 2  , 3  ,MINS,                   ,    ,    ,    ,    ,    ,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-         ,WH_L,WH_D,WH_R,    ,    ,                   ,    ,    ,    ,    ,    ,
+         ,ASTR, 4  , 5  , 6  ,SLSH,                   ,    ,    ,    ,    ,    ,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-         ,    ,    ,    ,    ,    ,    ,         ,    ,    ,    ,    ,    ,    ,
+         ,CIRC, 7  , 8  , 9  ,PERC,    ,         ,    ,    ,    ,    ,    ,    ,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
                            ,    ,    ,             ,FN0 ,FN1
   //                  `----+----+----'        `----+----+----'
   ),
 
-};
-
-// Custom Actions
-const uint16_t PROGMEM fn_actions[] = {
-  [0] = ACTION_LAYER_MOMENTARY(1),  // to Fn overlay
-  [1] = ACTION_LAYER_MOMENTARY(2),  // to Fn overlay
 };
