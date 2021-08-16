@@ -34,6 +34,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #    define RGBLIGHT_SLEEP //  the RGB lighting will be switched off when the host goes to sleep
 #endif
 
+#undef  RGBLED_SPLIT
+#define RGBLED_SPLIT {29, 29}
+
+#undef  RGBLED_NUM
+#define RGBLED_NUM   58
+
 // If you are using an Elite C rev3 on the slave side, uncomment the lines below:
 // #define SPLIT_USB_DETECT
 // #define NO_USB_STARTUP_CHECK
