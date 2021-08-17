@@ -66,20 +66,82 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )
 };
 
+/* LED Map
+ * ,-----------------------------------------.                    ,-----------------------------------------.
+ * |  05  |  04  |  03  |  02  |  01  |  00  |                    |  29  |  30  |  31  |  32  |  33  |  34  |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * |  06  |  07  |  08  |  09  |  10  |  11  |                    |  40  |  39  |  38  |  37  |  36  |  35  |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * |  17  |  16  |  15  |  14  |  13  |  12  |------.      ,------|  41  |  42  |  43  |  44  |  45  |  46  |
+ * |------+------+------+------+------+------|  24  |      |  53  |------+------+------+------+------+------|
+ * |  18  |  19  |  20  |  21  |  22  |  23  |------|      |------|  52  |  51  |  50  |  49  |  48  |  47  |
+ * `-----------------------------------------/      /       \     \-----------------------------------------'
+ *                   |  28  |  27  |  26  | /  25  /         \  54 \  |  55  |  56  |  57  |
+ *                   `----------------------------'           '------''--------------------'
+ */
+
+#define HSV_DIM_WHITE 0,   0,   64
+#define HSV_DIM_TEAL  128, 255, 64
+#define HSV_DIM_RED   0,   230, 64
+#define HSV_DIM_PRED  0,   179, 64
+#define HSV_DIM_SPGRN 106, 255, 64
+#define HSV_DIM_GREEN 85,  255, 64
+#define HSV_DIM_MGNTA 213, 255, 64
+#define HSV_DIM_BLUE  170, 255, 64
+
 const rgblight_segment_t PROGMEM rgb_qwerty_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-  {0, 58, HSV_WHITE}
+  {0,  5,  HSV_DIM_TEAL},
+  {5,  1,  HSV_DIM_RED},
+  {6,  23, HSV_DIM_WHITE},
+  {29, 5,  HSV_DIM_TEAL},
+  {34, 1,  HSV_DIM_RED},
+  {35, 23, HSV_DIM_WHITE}
 );
 
 const rgblight_segment_t PROGMEM rgb_lower_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-  {0, 58, HSV_RED}
+  {0,  5,  HSV_DIM_SPGRN},
+  {29, 5,  HSV_DIM_SPGRN},
+  {8,  2,  HSV_DIM_MGNTA},
+  {13, 1,  HSV_DIM_MGNTA},
+  {14, 2,  HSV_DIM_BLUE},
+  {16, 1,  HSV_DIM_MGNTA},
+  {19, 1,  HSV_DIM_TEAL},
+  {20, 2,  HSV_DIM_MGNTA},
+  {38, 3,  HSV_DIM_MGNTA},
+  {41, 4,  HSV_DIM_BLUE},
+  {50, 3,  HSV_DIM_MGNTA}
 );
 
 const rgblight_segment_t PROGMEM rgb_raise_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-  {0, 58, HSV_GREEN}
+  {0,  1,  HSV_OFF},
+  {1,  3,  HSV_DIM_GREEN},
+  {4,  1,  HSV_OFF},
+  {7,  1,  HSV_DIM_TEAL},
+  {8,  3,  HSV_DIM_SPGRN},
+  {11, 2,  HSV_DIM_TEAL},
+  {13, 3,  HSV_DIM_SPGRN},
+  {16, 1,  HSV_DIM_TEAL},
+  {19, 1,  HSV_DIM_TEAL},
+  {20, 3,  HSV_DIM_SPGRN},
+  {23, 1,  HSV_DIM_TEAL},
+  {29, 5,  HSV_OFF},
+  {35, 3,  HSV_OFF},
+  {38, 2,  HSV_DIM_TEAL},
+  {40, 2,  HSV_OFF},
+  {42, 3,  HSV_DIM_SPGRN},
+  {45, 2,  HSV_OFF},
+  {48, 1,  HSV_OFF},
+  {49, 3,  HSV_DIM_SPGRN},
+  {52, 1,  HSV_OFF}
 );
 
 const rgblight_segment_t PROGMEM rgb_adjust_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-  {0, 58, HSV_BLUE}
+  {0,  5,  HSV_OFF},
+  {6,  12, HSV_DIM_MGNTA},
+  {18, 6,  HSV_OFF},
+  {29, 13, HSV_OFF},
+  {42, 1,  HSV_DIM_BLUE},
+  {43, 10, HSV_OFF}
 );
 
 const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
