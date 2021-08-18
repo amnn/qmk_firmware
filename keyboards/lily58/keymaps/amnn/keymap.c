@@ -23,13 +23,15 @@ extern uint8_t is_master;
 
 enum layers {
     _QWERTY,
+    _UNSHIFT,
     _LOWER,
     _RAISE,
     _ADJUST,
 };
 
-#define RAISE MO(_RAISE)
-#define LOWER MO(_LOWER)
+#define UNSHIFT TG(_UNSHIFT)
+#define RAISE   MO(_RAISE)
+#define LOWER   MO(_LOWER)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -39,6 +41,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
    KC_LSFT, KC_GRV,  KC_Z,    KC_X,    KC_C,    KC_V,    XXXXXXX,          XXXXXXX, KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_RSFT,
                               KC_LALT, KC_LGUI, LOWER,   KC_SPC,           KC_ENT,  RAISE,   XXXXXXX, XXXXXXX
+),
+
+[_UNSHIFT] = LAYOUT(
+   _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
+   _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
+   _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
+   _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
+                              _______, _______, _______, _______,          _______, _______, _______, _______
 ),
 
 [_LOWER] = LAYOUT(
@@ -58,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [_ADJUST] = LAYOUT(
-   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+   _______, UNSHIFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
    KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                              XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
    KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,                             XXXXXXX, RGB_TOG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,          _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
@@ -96,6 +106,11 @@ const rgblight_segment_t PROGMEM rgb_qwerty_layer[] = RGBLIGHT_LAYER_SEGMENTS(
   {29, 5,  HSV_DIM_TEAL},
   {34, 1,  HSV_DIM_RED},
   {35, 23, HSV_DIM_WHITE}
+);
+
+const rgblight_segment_t PROGMEM rgb_unshift_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+  {0,  5,  HSV_DIM_SPGRN},
+  {29, 5,  HSV_DIM_SPGRN}
 );
 
 const rgblight_segment_t PROGMEM rgb_lower_layer[] = RGBLIGHT_LAYER_SEGMENTS(
@@ -136,7 +151,8 @@ const rgblight_segment_t PROGMEM rgb_raise_layer[] = RGBLIGHT_LAYER_SEGMENTS(
 );
 
 const rgblight_segment_t PROGMEM rgb_adjust_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-  {0,  5,  HSV_OFF},
+  {0,  4,  HSV_OFF},
+  {4,  1,  HSV_DIM_RED},
   {6,  12, HSV_DIM_MGNTA},
   {18, 6,  HSV_OFF},
   {29, 13, HSV_OFF},
@@ -146,6 +162,7 @@ const rgblight_segment_t PROGMEM rgb_adjust_layer[] = RGBLIGHT_LAYER_SEGMENTS(
 
 const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
     rgb_qwerty_layer,
+    rgb_unshift_layer,
     rgb_lower_layer,
     rgb_raise_layer,
     rgb_adjust_layer
@@ -154,9 +171,10 @@ const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
 layer_state_t layer_state_set_user(layer_state_t state) {
     state = update_tri_layer_state(state, _RAISE, _LOWER, _ADJUST);
 
-    rgblight_set_layer_state(1, layer_state_cmp(state, _LOWER));
-    rgblight_set_layer_state(2, layer_state_cmp(state, _RAISE));
-    rgblight_set_layer_state(3, layer_state_cmp(state, _ADJUST));
+    rgblight_set_layer_state(1, layer_state_cmp(state, _UNSHIFT));
+    rgblight_set_layer_state(2, layer_state_cmp(state, _LOWER));
+    rgblight_set_layer_state(3, layer_state_cmp(state, _RAISE));
+    rgblight_set_layer_state(4, layer_state_cmp(state, _ADJUST));
 
     return state;
 }
