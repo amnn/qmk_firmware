@@ -71,7 +71,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    _______, UNSHIFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
    KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                              XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
    KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,                             XXXXXXX, RGB_TOG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,          _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+   KC_CAPS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,          _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_CAPS,
                               _______, _______, _______, _______,          _______, _______, _______, _______
   )
 };
@@ -154,10 +154,18 @@ const rgblight_segment_t PROGMEM rgb_adjust_layer[] = RGBLIGHT_LAYER_SEGMENTS(
   {0,  4,  HSV_OFF},
   {4,  1,  HSV_DIM_RED},
   {6,  12, HSV_DIM_MGNTA},
-  {18, 6,  HSV_OFF},
+  {18, 1,  HSV_DIM_RED},
+  {19, 5,  HSV_OFF},
   {29, 13, HSV_OFF},
   {42, 1,  HSV_DIM_BLUE},
-  {43, 10, HSV_OFF}
+  {43, 4,  HSV_OFF},
+  {47, 1,  HSV_DIM_RED},
+  {48, 5,  HSV_OFF}
+);
+
+const rgblight_segment_t PROGMEM rgb_capslock_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+  {18, 1,  HSV_DIM_RED},
+  {47, 1,  HSV_DIM_RED}
 );
 
 const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
@@ -165,7 +173,8 @@ const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
     rgb_unshift_layer,
     rgb_lower_layer,
     rgb_raise_layer,
-    rgb_adjust_layer
+    rgb_adjust_layer,
+    rgb_capslock_layer
 );
 
 layer_state_t layer_state_set_user(layer_state_t state) {
@@ -177,6 +186,11 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(4, layer_state_cmp(state, _ADJUST));
 
     return state;
+}
+
+bool led_update_user(led_t led_state) {
+  rgblight_set_layer_state(5, led_state.caps_lock);
+  return true;
 }
 
 void keyboard_post_init_user(void) {
