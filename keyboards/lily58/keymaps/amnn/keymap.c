@@ -17,6 +17,7 @@
   */
 
 #include QMK_KEYBOARD_H
+#include "pimoroni_trackball.h"
 
 
 extern uint8_t is_master;
@@ -198,6 +199,8 @@ void keyboard_post_init_user(void) {
 
   // Default RGB layer -- always on.
   rgblight_set_layer_state(0, true);
+
+  trackball_set_precision(3);
 }
 
 //SSD1306 OLED update loop, make sure to enable OLED_DRIVER_ENABLE=yes in rules.mk
