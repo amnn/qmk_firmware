@@ -30,6 +30,12 @@ enum layers {
   _ADJUST,
 };
 
+enum custom_keycodes {
+    TB_BTN1 = SAFE_RANGE,
+    TB_BTN2,
+    TB_SCRL,
+};
+
 #define UNSHIFT TG(_UNSHIFT)
 #define RAISE   MO(_RAISE)
 #define LOWER   MO(_LOWER)
@@ -40,8 +46,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC,  KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                            KC_CIRC, KC_AMPR, KC_ASTR, KC_MINS, KC_EQL,  KC_BSPC,
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                               KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_SLSH,
     KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-    KC_LSFT, KC_GRV,  KC_Z,    KC_X,    KC_C,    KC_V,    XXXXXXX,          XXXXXXX, KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_RSFT,
-                               KC_LALT, KC_LGUI, LOWER,   KC_SPC,           KC_ENT,  RAISE,   XXXXXXX, XXXXXXX
+    KC_LSFT, KC_GRV,  KC_Z,    KC_X,    KC_C,    KC_V,    TB_BTN1,          XXXXXXX, KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_RSFT,
+                               KC_LALT, KC_LGUI, LOWER,   KC_SPC,           KC_ENT,  RAISE,   TB_BTN2, TB_SCRL
   ),
 
   [_UNSHIFT] = LAYOUT(
@@ -200,7 +206,23 @@ void keyboard_post_init_user(void) {
   // Default RGB layer -- always on.
   rgblight_set_layer_state(0, true);
 
-  trackball_set_precision(3);
+  trackball_set_precision(1.5);
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+  switch (keycode) {
+    case TB_BTN1:
+      trackball_register_button(record->event.pressed, MOUSE_BTN1);
+      return false;
+    case TB_BTN2:
+      trackball_register_button(record->event.pressed, MOUSE_BTN2);
+      return false;
+    case TB_SCRL:
+      trackball_set_scrolling(record->event.pressed);
+      return false;
+    default:
+      return true;
+  }
 }
 
 //SSD1306 OLED update loop, make sure to enable OLED_DRIVER_ENABLE=yes in rules.mk
