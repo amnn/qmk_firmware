@@ -185,7 +185,7 @@ enum backlight_kind {
 }
 
 #define HSV_THEME_OFF      0,   0,   0
-#define HSV_THEME_DBLUE  196, 200,  64
+#define HSV_THEME_DBLUE  196, 255,  64
 #define HSV_THEME_BLUE   148, 255,  64
 #define HSV_THEME_GREEN   80, 255,  64
 #define HSV_THEME_ORANGE  10, 255,  64
@@ -227,6 +227,8 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     // TODO: Shift becomes capslock if capslock is enabled.
     // TODO: RGB toggle always lights up even if RGB is toggled off.
 
+    static uint16_t timer = 0;
+
     for (uint8_t i = led_min; i < led_max; ++i) {
         enum backlight_kind kind;
 
@@ -260,7 +262,8 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                 set_hsv(i, HSV_THEME_GREEN);
                 break;
             case LD_RGB:
-                set_hsv(i, HSV_THEME_RED);
+                timer = timer_read();
+                set_hsv(i, (timer / 16) % 255, 255, 64);
                 break;
         }
     }
