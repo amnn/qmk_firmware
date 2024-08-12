@@ -233,7 +233,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         enum backlight_kind kind;
 
         uint8_t layer = get_highest_layer(layer_state);
-        while ((kind = backlights[layer][i]) == LD_____ && i > 0)
+        while ((kind = backlights[layer][i]) == LD_____ && layer > 0)
             --layer;
 
         switch (kind) {
