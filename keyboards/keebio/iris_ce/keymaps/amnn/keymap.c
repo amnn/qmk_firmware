@@ -227,8 +227,6 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     // TODO: Shift becomes capslock if capslock is enabled.
     // TODO: RGB toggle always lights up even if RGB is toggled off.
 
-    static uint16_t timer = 0;
-
     for (uint8_t i = led_min; i < led_max; ++i) {
         enum backlight_kind kind;
 
@@ -262,8 +260,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                 set_hsv(i, HSV_THEME_GREEN);
                 break;
             case LD_RGB:
-                timer = timer_read();
-                set_hsv(i, (timer / 16) % 255, 255, 64);
+                set_hsv(i, (timer_read() / 16) % 255, 255, 64);
                 break;
         }
     }
