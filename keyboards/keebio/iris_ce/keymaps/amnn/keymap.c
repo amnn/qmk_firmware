@@ -43,6 +43,7 @@ enum backlight_kind {
     LD_ABC  = 1,    // Alphabetic keys
     LD_NUM,         // Numeric keys
     LD_OP,          // Operator keys
+    LD_SHIFT,       // Shift keys (special because of caps lock handling)
     LD_MOD,         // Modifier keys
     LD_WARN,        // Things to flag as warnings (e.g. potentially destructive)
     LD_NAV,         // Navigation keys, e.g. arrows
@@ -224,7 +225,6 @@ void set_hsv(uint8_t led, uint8_t h, uint8_t s, uint8_t v) {
 }
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    // TODO: Shift becomes capslock if capslock is enabled.
     // TODO: RGB toggle always lights up even if RGB is toggled off.
 
     for (uint8_t i = led_min; i < led_max; ++i) {
@@ -249,6 +249,12 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             case LD_OP:
                 set_hsv(i, HSV_THEME_DBLUE);
                 break;
+            case LD_SHIFT:
+                if (host_keyboard_led_state().caps_lock) {
+                    set_hsv(i, HSV_THEME_RED);
+                    break;
+                }
+                /* fallthrough */
             case LD_FN:
             case LD_MOD:
                 set_hsv(i, HSV_THEME_ORANGE);
