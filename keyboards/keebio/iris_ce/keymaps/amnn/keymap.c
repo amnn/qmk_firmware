@@ -225,8 +225,6 @@ void set_hsv(uint8_t led, uint8_t h, uint8_t s, uint8_t v) {
 }
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    // TODO: RGB toggle always lights up even if RGB is toggled off.
-
     for (uint8_t i = led_min; i < led_max; ++i) {
         enum backlight_kind kind;
 
