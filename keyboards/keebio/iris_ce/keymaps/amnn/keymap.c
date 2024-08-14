@@ -43,7 +43,7 @@ enum backlight_kind {
     LD_ABC  = 1,    // Alphabetic keys
     LD_NUM,         // Numeric keys
     LD_OP,          // Operator keys
-    LD_SHIFT,       // Shift keys (special because of caps lock handling)
+    LD_SHFT,        // Shift keys (special because of caps lock handling)
     LD_MOD,         // Modifier keys
     LD_WARN,        // Things to flag as warnings (e.g. potentially destructive)
     LD_NAV,         // Navigation keys, e.g. arrows
@@ -68,7 +68,7 @@ enum backlight_kind {
     LD_MOD , LD_ABC , LD_ABC , LD_ABC , LD_ABC , LD_ABC ,                   LD_ABC , LD_ABC , LD_ABC , LD_ABC , LD_OP  , LD_OP  , \
     KC_LCTL, KC_A   , KC_S   , KC_D   , KC_F   , KC_G   ,                   KC_H   , KC_J   , KC_K   , KC_L   , KC_SCLN, KC_QUOT, \
                                                                                                                                   \
-    LD_MOD , LD_OP  , LD_ABC , LD_ABC , LD_ABC , LD_ABC , LD_NAV , LD_NAV , LD_ABC , LD_ABC , LD_ABC , LD_OP  , LD_OP  , LD_MOD , \
+    LD_SHFT, LD_OP  , LD_ABC , LD_ABC , LD_ABC , LD_ABC , LD_NAV , LD_NAV , LD_ABC , LD_ABC , LD_ABC , LD_OP  , LD_OP  , LD_SHFT, \
     KC_LSFT, KC_GRV , KC_Z   , KC_X   , KC_C   , KC_V   , KC_SPC , KC_ENT , KC_B   , KC_N   , KC_M   , KC_COMM, KC_DOT , KC_RSFT, \
                                                                                                                                   \
                                        LD_MOD  , LD_FN  , LD_NAV , LD_NAV , LD_FN  , LD_MOD ,                                     \
@@ -247,7 +247,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             case LD_OP:
                 set_hsv(i, HSV_THEME_DBLUE);
                 break;
-            case LD_SHIFT:
+            case LD_SHFT:
                 if (host_keyboard_led_state().caps_lock) {
                     set_hsv(i, HSV_THEME_RED);
                     break;
