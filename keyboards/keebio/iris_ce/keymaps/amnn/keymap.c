@@ -68,8 +68,8 @@ enum backlight_kind {
     LD_MOD , LD_ABC , LD_ABC , LD_ABC , LD_ABC , LD_ABC ,                   LD_ABC , LD_ABC , LD_ABC , LD_ABC , LD_OP  , LD_OP  , \
     KC_LCTL, KC_A   , KC_S   , KC_D   , KC_F   , KC_G   ,                   KC_H   , KC_J   , KC_K   , KC_L   , KC_SCLN, KC_QUOT, \
                                                                                                                                   \
-    LD_SHFT, LD_OP  , LD_ABC , LD_ABC , LD_ABC , LD_ABC , LD_NAV , LD_NAV , LD_ABC , LD_ABC , LD_ABC , LD_OP  , LD_OP  , LD_SHFT, \
-    KC_LSFT, KC_GRV , KC_Z   , KC_X   , KC_C   , KC_V   , KC_SPC , KC_ENT , KC_B   , KC_N   , KC_M   , KC_COMM, KC_DOT , KC_RSFT, \
+    LD_SHFT, LD_OP  , LD_ABC , LD_ABC , LD_ABC , LD_ABC , LD_MOD , LD_MOD , LD_ABC , LD_ABC , LD_ABC , LD_OP  , LD_OP  , LD_SHFT, \
+    KC_LSFT, KC_GRV , KC_Z   , KC_X   , KC_C   , KC_V   , KC_RGUI, KC_RGUI, KC_B   , KC_N   , KC_M   , KC_COMM, KC_DOT , KC_RSFT, \
                                                                                                                                   \
                                        LD_MOD  , LD_FN  , LD_NAV , LD_NAV , LD_FN  , LD_MOD ,                                     \
                                        KC_LGUI , LOWER  , KC_SPC , KC_ENT , RAISE  , KC_RALT                                      \
